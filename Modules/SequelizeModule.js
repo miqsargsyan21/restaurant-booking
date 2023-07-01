@@ -20,7 +20,7 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
 });
 
-const connect = () => {
+const connectToDatabase = () => {
   sequelize.authenticate()
     .then(() => {
       console.log('Connected to Database');
@@ -30,4 +30,17 @@ const connect = () => {
     });
 };
 
-export { connect };
+const syncToDatabase = async () => {
+  try {
+    await sequelize.sync({ force: true });
+    console.log('Synced to Database');
+  } catch (err) {
+    console.log(`Error syncing to Database: ${err}`);
+  }
+}
+
+export {
+  connectToDatabase,
+  syncToDatabase,
+  sequelize,
+};

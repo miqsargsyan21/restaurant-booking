@@ -1,4 +1,4 @@
-import { connect } from "./Modules/SequelizeModule.js";
+import { connectToDatabase } from "./Modules/SequelizeModule.js";
 import Routes from "./Routes/index.js";
 import bodyParser from "body-parser";
 import express from 'express';
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', Routes);
 
-connect();
+connectToDatabase();
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
