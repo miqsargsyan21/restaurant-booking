@@ -24,4 +24,4 @@ export {
   updateReservation,
   deleteReservation,
   addReservation
-}
+};

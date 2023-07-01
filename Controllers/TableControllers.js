@@ -1,22 +1,109 @@
+import { Table } from '../models/index.js';
+
 const getAllTables = async (req, res) => {
-  res.send('Hello world!');
-}
+  try {
+    const tables = await Table.findAll();
+
+    res.status(200).json({
+      success: true,
+      data: tables,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 const getTableById = async (req, res) => {
-  res.send(`Hello world! ${req.params.id}`);
-}
+  const { tableId } = req.params;
+
+  try {
+    const table = await Table.findByPk(tableId);
+
+    res.status(200).json({
+      success: true,
+      data: table,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 const addTable = async (req, res) => {
-  res.send('Hello world!');
-}
+  const { number, seats, status } = req.body;
+
+  try {
+    const table = await Table.create({
+      number,
+      seats,
+      status,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: table,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 const updateTable = async (req, res) => {
-  res.send(`Hello world! ${req.params.id}`);
-}
+  const { tableId } = req.params;
+  const { number, seats, status } = req.body;
+
+  try {
+    const table = await Table.update({
+      number,
+      seats,
+      status,
+    }, {
+      where: {
+        id: tableId,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      data: table,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 const deleteTable = async (req, res) => {
-  res.send(`Hello world! ${req.params.id}`);
-}
+  const { tableId } = req.params;
+
+  try {
+    const table = await Table.destroy({
+      where: {
+        id: tableId,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      data: table,
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 export {
   getAllTables,
@@ -24,4 +111,4 @@ export {
   updateTable,
   deleteTable,
   addTable
-}
+};

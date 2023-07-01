@@ -1,25 +1,24 @@
 import { sequelize } from "../Modules/SequelizeModule.js";
 import { DataTypes } from "sequelize";
 
-const Table = sequelize.define('Table', {
+const Meal = sequelize.define('Meal', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  number: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
-  },
-  seats: {
-    type: DataTypes.INTEGER,
+  name: {
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
-  status: {
-    type: DataTypes.STRING,
+  description: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  price: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   }
 });
 
-export default Table;
+export default Meal;

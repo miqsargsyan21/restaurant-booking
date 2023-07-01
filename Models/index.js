@@ -1,10 +1,9 @@
 import { syncToDatabase } from "../Modules/SequelizeModule.js";
 import Reservation from "./Reservation.js";
+import Preorder from "./Preorder.js";
 import Table from "./Table.js";
 import User from "./User.js";
-
-User.hasMany(Table);
-Table.belongsTo(User);
+import Meal from "./Meal.js";
 
 User.hasMany(Reservation);
 Reservation.belongsTo(User);
@@ -12,6 +11,18 @@ Reservation.belongsTo(User);
 Table.hasMany(Reservation);
 Reservation.belongsTo(Table);
 
+Meal.hasMany(Preorder);
+Preorder.belongsTo(Meal);
+
+Reservation.hasMany(Preorder);
+Preorder.belongsTo(Reservation);
+
 syncToDatabase();
 
-export { Reservation, Table, User };
+export {
+  Reservation,
+  Preorder,
+  Table,
+  User,
+  Meal
+};
