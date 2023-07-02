@@ -1,4 +1,24 @@
+import validate from "../Services/Validator/validate.js";
 import { User } from '../models/index.js';
+
+const validationRules = [
+  {
+    validator: 'name',
+    field: 'firstName',
+  },
+  {
+    validator: 'name',
+    field: 'lastName',
+  },
+  {
+    validator: 'username',
+    field: 'username',
+  },
+  {
+    validator: 'password',
+    field: 'password',
+  }
+];
 
 const getAllUsers = async (req, res) => {
   try {
@@ -9,7 +29,7 @@ const getAllUsers = async (req, res) => {
       data: users,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -17,7 +37,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const { userId } = req.params;
+  const { id: userId } = req.params;
 
   try {
     const user = await User.findByPk(userId);
@@ -27,7 +47,7 @@ const getUserById = async (req, res) => {
       data: user,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -38,6 +58,12 @@ const addUser = async (req, res) => {
   const { firstName, lastName, username, password } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const user = await User.create({
       firstName,
       lastName,
@@ -50,7 +76,7 @@ const addUser = async (req, res) => {
       data: user,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -58,10 +84,16 @@ const addUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { userId } = req.params;
+  const { id: userId } = req.params;
   const { firstName, lastName, username, password } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const user = await User.update({
       firstName,
       lastName,
@@ -78,7 +110,7 @@ const updateUser = async (req, res) => {
       data: user,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -86,7 +118,7 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { userId } = req.params;
+  const { id: userId } = req.params;
 
   try {
     await User.destroy({
@@ -100,7 +132,7 @@ const deleteUser = async (req, res) => {
       message: `User with id ${userId} deleted`,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });

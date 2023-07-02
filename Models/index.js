@@ -5,17 +5,11 @@ import Table from "./Table.js";
 import User from "./User.js";
 import Meal from "./Meal.js";
 
-User.hasMany(Reservation);
-Reservation.belongsTo(User);
+User.belongsToMany(Table, { through: Reservation, as: 'Users' });
+Table.belongsToMany(User, { through: Reservation, as: 'Tables' });
 
-Table.hasMany(Reservation);
-Reservation.belongsTo(Table);
-
-Meal.hasMany(Preorder);
-Preorder.belongsTo(Meal);
-
-Reservation.hasMany(Preorder);
-Preorder.belongsTo(Reservation);
+Meal.belongsToMany(Reservation, { through: Preorder, as: 'Meals' });
+Reservation.belongsToMany(Meal, { through: Preorder, as: 'Reservations' });
 
 syncToDatabase();
 

@@ -1,4 +1,20 @@
+import validate from "../Services/Validator/validate.js";
 import { Table } from '../models/index.js';
+
+const validationRules = [
+  {
+    validator: 'number',
+    field: 'number',
+  },
+  {
+    validator: 'number',
+    field: 'seats',
+  },
+  {
+    validator: 'status',
+    field: 'status',
+  }
+];
 
 const getAllTables = async (req, res) => {
   try {
@@ -9,7 +25,7 @@ const getAllTables = async (req, res) => {
       data: tables,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -17,7 +33,7 @@ const getAllTables = async (req, res) => {
 };
 
 const getTableById = async (req, res) => {
-  const { tableId } = req.params;
+  const { id: tableId } = req.params;
 
   try {
     const table = await Table.findByPk(tableId);
@@ -27,7 +43,7 @@ const getTableById = async (req, res) => {
       data: table,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -38,6 +54,12 @@ const addTable = async (req, res) => {
   const { number, seats, status } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const table = await Table.create({
       number,
       seats,
@@ -49,7 +71,7 @@ const addTable = async (req, res) => {
       data: table,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -57,10 +79,16 @@ const addTable = async (req, res) => {
 };
 
 const updateTable = async (req, res) => {
-  const { tableId } = req.params;
+  const { id: tableId } = req.params;
   const { number, seats, status } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const table = await Table.update({
       number,
       seats,
@@ -76,7 +104,7 @@ const updateTable = async (req, res) => {
       data: table,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });
@@ -84,7 +112,7 @@ const updateTable = async (req, res) => {
 };
 
 const deleteTable = async (req, res) => {
-  const { tableId } = req.params;
+  const { id: tableId } = req.params;
 
   try {
     const table = await Table.destroy({
@@ -98,7 +126,7 @@ const deleteTable = async (req, res) => {
       data: table,
     });
   } catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: e.message,
     });

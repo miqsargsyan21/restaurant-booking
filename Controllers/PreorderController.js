@@ -1,5 +1,28 @@
+import { Meal, Preorder, Reservation } from '../models/index.js';
+
 const getAllPreorders = async (req, res) => {
-  res.send('getAllPreorders');
+  try {
+    const response = await Preorder.findAll({
+      include: [
+        {
+          model: Reservation,
+        },
+        {
+          model: Meal,
+        }
+      ]
+    });
+
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
+  } catch (e) {
+    res.status(400).json({
+      success: false,
+      message: e.message,
+    });
+  }
 };
 
 const getPreorderById = async (req, res) => {
@@ -18,7 +41,7 @@ const deletePreorder = async (req, res) => {
   res.send('deletePreorder');
 };
 
-export default {
+export {
   getAllPreorders,
   getPreorderById,
   updatePreorder,
