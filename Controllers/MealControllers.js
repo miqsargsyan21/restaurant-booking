@@ -85,7 +85,7 @@ const updateMeal = async (req, res) => {
       throw new Error('Invalid data');
     }
 
-    const response = await Meal.update({ name, price, description }, { where: { meal_id: mealId } });
+    const response = await Meal.update({ name, price, description }, { where: { id: mealId } });
 
     res.status(200).json({
       success: true,
@@ -103,7 +103,7 @@ const deleteMeal = async (req, res) => {
   const { id: mealId } = req.params;
 
   try {
-    const response = await Meal.destroy({ where: { meal_id: mealId } });
+    const response = await Meal.destroy({ where: { id: mealId } });
 
     res.status(200).json({
       success: true,
