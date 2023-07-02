@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  title: Restaurant API
+  description: Restaurant API description
+  version: 1.0.0
+paths:
+  /api/user:
+    get:
+      summary: Get user
+      description: Get user
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    post:
+      summary: Create user
+      description: Create user
+      tags:
+        - User
+      responses:
+        '200':
+          description: Created
+        '400':
+          description: Bad Request
+  /api/user/{id}:
+    get:
+      summary: Get user by id
+      description: Get user by id
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      summary: Update user
+      description: Update user
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete user
+      description: Delete user
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+  /api/table:
+    get:
+      summary: Get table
+      description: Get table
+      tags:
+        - Table
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    post:
+      summary: Create table
+      description: Create table
+      tags:
+        - Table
+      responses:
+        '200':
+          description: Created
+        '400':
+          description: Bad Request
+  /api/table/{id}:
+    get:
+      summary: Get table by id
+      description: Get table by id
+      tags:
+        - Table
+      parameters:
+        - name: id
+          in: path
+          description: Table id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      summary: Update table
+      description: Update table
+      tags:
+        - Table
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete table
+      description: Delete table
+      tags:
+        - Table
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+  /api/meal:
+    get:
+      summary: Get meal
+      description: Get meal
+      tags:
+        - Meal
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    post:
+      summary: Create meal
+      description: Create meal
+      tags:
+        - Meal
+      responses:
+        '200':
+          description: Created
+        '400':
+          description: Bad Request
+  /api/meal/{id}:
+    get:
+      summary: Get meal by id
+      description: Get meal by id
+      tags:
+        - Meal
+      parameters:
+        - name: id
+          in: path
+          description: Meal id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      summary: Update meal
+      description: Update meal
+      tags:
+        - Meal
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete meal
+      description: Delete meal
+      tags:
+        - Meal
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+  /api/reservation:
+    get:
+      summary: Get reservation
+      description: Get reservation
+      tags:
+        - Reservation
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    post:
+      summary: Create reservation
+      description: Create reservation
+      tags:
+        - Reservation
+      responses:
+        '200':
+          description: Created
+        '400':
+          description: Bad Request
+  /api/reservation/{id}:
+    get:
+      summary: Get reservation by id
+      description: Get reservation by id
+      tags:
+        - Reservation
+      parameters:
+        - name: id
+          in: path
+          description: Reservation id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      summary: Update reservation
+      description: Update reservation
+      tags:
+        - Reservation
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete reservation
+      description: Delete reservation
+      tags:
+        - Reservation
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+  /api/preorder:
+    get:
+      summary: Get preorder
+      description: Get preorder
+      tags:
+        - Preorder
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    post:
+      summary: Create preorder
+      description: Create preorder
+      tags:
+        - Preorder
+      responses:
+        '200':
+          description: Created
+        '400':
+          description: Bad Request
+  /api/preorder/{id}:
+    get:
+      summary: Get preorder by id
+      description: Get preorder by id
+      tags:
+        - Preorder
+      parameters:
+        - name: id
+          in: path
+          description: Preorder id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      summary: Update preorder
+      description: Update preorder
+      tags:
+        - Preorder
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete preorder
+      description: Delete preorder
+      tags:
+        - Preorder
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
