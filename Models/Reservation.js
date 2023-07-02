@@ -8,7 +8,7 @@ const Reservation = sequelize.define('Reservation', {
     primaryKey: true,
   },
   date: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
   time: {
@@ -17,10 +17,6 @@ const Reservation = sequelize.define('Reservation', {
   },
   duration: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  status: {
-    type: DataTypes.STRING(50),
     allowNull: false,
   }
 });

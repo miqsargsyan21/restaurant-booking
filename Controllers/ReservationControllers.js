@@ -1,4 +1,20 @@
 import { Reservation, User, Table } from '../models/index.js';
+import validate from "../Services/Validator/validate.js";
+
+const validationRules = [
+  {
+    validator: 'date',
+    field: 'date',
+  },
+  {
+    validator: 'time',
+    field: 'time',
+  },
+  {
+    validator: 'number',
+    field: 'duration',
+  }
+];
 
 const getAllReservations = async (req, res) => {
   try {
@@ -53,9 +69,15 @@ const getReservationById = async (req, res) => {
 };
 
 const addReservation = async (req, res) => {
-  const { date, time, duration, status, userId, tableId } = req.body;
+  const { date, time, duration, userId, tableId } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const user = await User.findByPk(userId);
     const table = await Table.findByPk(tableId);
 
@@ -69,7 +91,6 @@ const addReservation = async (req, res) => {
       date,
       time,
       duration,
-      status,
       UserId: userId,
       TableId: tableId,
     });
@@ -88,9 +109,15 @@ const addReservation = async (req, res) => {
 
 const updateReservation = async (req, res) => {
   const { id: reservationId } = req.params;
-  const { date, time, duration, status, userId, tableId } = req.body;
+  const { date, time, duration, userId, tableId } = req.body;
 
   try {
+    const isValid = validate(req.body, validationRules);
+
+    if (!isValid) {
+      throw new Error('Invalid data');
+    }
+
     const reservation = await Reservation.findByPk(reservationId);
 
     if (!reservation) {
@@ -109,7 +136,6 @@ const updateReservation = async (req, res) => {
     reservation.date = date;
     reservation.time = time;
     reservation.duration = duration;
-    reservation.status = status;
     reservation.UserId = userId;
     reservation.TableId = tableId;
 
