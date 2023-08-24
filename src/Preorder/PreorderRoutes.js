@@ -5,7 +5,7 @@ import {
   updatePreorder,
   deletePreorder,
   addPreorder
-} from '../Controllers/PreorderController.js';
+} from './PreorderController.js';
 
 const router = Router();
 

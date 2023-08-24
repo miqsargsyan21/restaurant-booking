@@ -1,5 +1,5 @@
 import validate from "../Services/Validator/validate.js";
-import { Table } from '../models/index.js';
+import Table from "./Table.js";
 
 const validationRules = [
   {

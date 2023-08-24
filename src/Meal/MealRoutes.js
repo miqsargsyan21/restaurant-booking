@@ -5,7 +5,7 @@ import {
   updateMeal,
   deleteMeal,
   addMeal,
-} from "../Controllers/MealControllers.js";
+} from "./MealControllers.js";
 
 const router = Router();
 

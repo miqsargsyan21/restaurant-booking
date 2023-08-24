@@ -1,5 +1,5 @@
 import validate from "../Services/Validator/validate.js";
-import { User } from '../models/index.js';
+import User from "./User.js";
 
 const validationRules = [
   {

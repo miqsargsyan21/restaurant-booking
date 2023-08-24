@@ -5,7 +5,7 @@ import {
   updateReservation,
   deleteReservation,
   addReservation
-} from "../Controllers/ReservationControllers.js";
+} from "./ReservationControllers.js";
 
 const router = Router();
 

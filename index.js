@@ -1,7 +1,7 @@
-import { connectToDatabase } from "./Modules/SequelizeModule.js";
+import { connectToDatabase } from "./src/Modules/SequelizeModule.js";
 import swaggerUi from 'swagger-ui-express';
-import Routes from "./Routes/index.js";
 import bodyParser from "body-parser";
+import AppRouter from "./src/app.js";
 import express from 'express';
 import dotenv from 'dotenv';
 import yaml from 'yamljs';
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
-app.use('/api', Routes);
+app.use('/api', AppRouter());
 
 connectToDatabase();
 
